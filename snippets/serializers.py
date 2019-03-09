@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from snippets.models import Snippet
+from snippets.models import Snippet, Todo
 
 
 class SnippetSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,3 +22,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'id', 'username', 'snippets')
+
+class TodoSerializer(serializers.HyperlinkedModelSerializer):
+    todos = serializers.HyperlinkedRelatedField(
+        many=True, view_name='todo-detail', read_only=True)
+
+    class Meta:
+        model = Todo
+        fields = ('url', 'id', 'created', 'title')
