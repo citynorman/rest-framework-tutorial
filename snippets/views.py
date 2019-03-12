@@ -3,6 +3,7 @@ from rest_framework import generics, permissions, renderers, viewsets
 from rest_framework.decorators import api_view, detail_route
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.generics import get_object_or_404
 
 from snippets.models import Snippet, Todo
 from snippets.permissions import IsOwnerOrReadOnly
@@ -44,3 +45,17 @@ class TodoViewSet(viewsets.ModelViewSet):
     """
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
+
+    @detail_route(methods=['post'])
+    def credentials(self, request, pk=None):
+        """
+        get permissions
+        """
+        # todo: implement
+
+        # pipe = get_object_or_404(self.get_queryset(), pk=pk)
+        pipe = get_object_or_404(self.get_queryset(), pk=pk)
+        print('body',request.data)
+        return Response({})
+
+

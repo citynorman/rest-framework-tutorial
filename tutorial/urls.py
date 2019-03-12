@@ -7,7 +7,8 @@ API_DESCRIPTION = 'A Web API for creating and viewing highlighted code snippets.
 schema_view = get_schema_view(title=API_TITLE)
 
 urlpatterns = [
-    url(r'^', include('snippets.urls')),
+    url(r'^api/v1/', include('snippets.urls', namespace='v10')),
+    url(r'^api/v1.1/', include('snippets.urls', namespace='v11')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^schema/$', schema_view),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION))

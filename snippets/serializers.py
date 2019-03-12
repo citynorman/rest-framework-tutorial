@@ -23,10 +23,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ('url', 'id', 'username', 'snippets')
 
-class TodoSerializer(serializers.HyperlinkedModelSerializer):
-    todos = serializers.HyperlinkedRelatedField(
-        many=True, view_name='todo-detail', read_only=True)
+class TodoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Todo
-        fields = ('url', 'id', 'created', 'title')
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret['yo']='test'
+        print(self.context['request'].version)
+        return ret

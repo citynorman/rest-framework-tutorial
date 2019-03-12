@@ -127,6 +127,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Django REST Framework
 REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'PAGE_SIZE': 10,
     'DEFAULT_PAGINATION_CLASS':
     'rest_framework.pagination.PageNumberPagination',
